@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 namespace StatsRoyale.SeleniumFramework.Pages
 {
+    /// <summary>
+    /// This is the card page containing methods to retrieve a specific card. As you may recall,
+    /// the card page in the StatsRoyale website contains properties/elements/controls [cards] and at least
+    /// one action/event that can be done on that page [getting cards by a specific name to click on].
+    /// </summary>
     public class CardsPage : BasePage
     {
         public CardsPageMap _CardsPageMap;

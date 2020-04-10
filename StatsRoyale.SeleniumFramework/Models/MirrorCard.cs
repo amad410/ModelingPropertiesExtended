@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace StatsRoyale.SeleniumFramework.Models
 {
+    /// <summary>
+    /// This is the model class of the Mirror card containing its properties and values.  
+    /// It overrides the property values of the base class Card.cs
+    /// </summary>
     public class MirrorCard : Card
     {
         public override string Name { get; set; } = "Mirror";

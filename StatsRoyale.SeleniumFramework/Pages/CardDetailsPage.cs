@@ -8,6 +8,16 @@ using System.Threading.Tasks;
 
 namespace StatsRoyale.SeleniumFramework.Pages
 {
+    /// <summary>
+    /// This is the page class model of the Card Details Page. It inherits from the BasePage class like other 
+    /// classes to have access to common page things and actions that can be performed on any web page. It also has 
+    /// access to the navigate using the navigational header.  The specific thing this class does is return to you 
+    /// card properties based on whatever card you click. This page object will return back to the properties of
+    /// base card model which will be overriden by the values of the elements it has retrieved from the UI view
+    /// once you navigate to the Card Details page in the UI. The overridden properties from the base card model can then
+    /// be used as actual properties retrieved from the UI and compared against the expected model properties of the card you
+    /// clicked on.
+    /// </summary>
     public class CardDetailsPage : BasePage
     {
         public IWebDriver _driver;

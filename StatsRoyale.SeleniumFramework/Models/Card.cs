@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace StatsRoyale.SeleniumFramework.Models
 {
+    /// <summary>
+    /// This is the base card model class containing base property values that can be overridden by
+    /// classes that inherit from this class. 
+    /// </summary>
     public class Card
     {
         public virtual string Name { get; set; } = "Mirror";
