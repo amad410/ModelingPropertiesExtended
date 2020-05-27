@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using StatsRoyale.SeleniumFramework.Models;
 using StatsRoyale.SeleniumFramework.Pages;
+using StatsRoyale.SeleniumFramework.Services;
+using Assert = NUnit.Framework.Assert;
 
 namespace StatsRoyale.SeleniumTests
 {
-    [TestClass]
+    [TestFixture]
     public class CardsTests
     {
         //this is a global variable in which all test methods in this class can use.
         IWebDriver driver;
+        static string[] cardNames = { "Ice Spirit", "Mirror" };
         [TestMethod]
         public void AssertIceSpiritCardIsOnCardPage()
         {
@@ -46,25 +50,37 @@ namespace StatsRoyale.SeleniumTests
         /// card only. However, we are working with different cards that have different properties. So we made a 3rd test
         /// that will utilize models and services to handle different types of test data properties.
         /// </summary>
+        /// 
+       
+
+
+
+
         [TestMethod]
-        public void AssertMirrorCardStatsOnDetailsPage()
+        [TestCaseSource("cardNames")]
+        [Parallelizable(ParallelScope.Children)]
+        //[TestCase("Mirror")]
+        //[TestCase("Ice Spirit")]
+        public void AssertDifferentCardStatsOnDetailsPage(string cardName)
         {
             CardsPage _cardsPage = new CardsPage(driver);
             _cardsPage.GoTo();
-            Thread.Sleep(TimeSpan.FromSeconds(10));
-            _cardsPage.GetCardByCardName("Mirror").Click();
+            Thread.Sleep(TimeSpan.FromSeconds(20));
+            _cardsPage.GetCardByCardName(cardName).Click();
             CardDetailsPage _cardDetailsPage = new CardDetailsPage(driver);
 
-            var card = _cardDetailsPage.GetBaseCard();
-            var mirror = new MirrorCard();
+            var cardOnPage = _cardDetailsPage.GetBaseCard();
+            //var mirror = new MirrorCard();
+            var targetedCardModel = new InMemoryCardService().GetCardByName(cardName);
 
-            Assert.AreEqual(mirror.Category, card.Category);
-            Assert.AreEqual(mirror.Arena, card.Arena);
-            Assert.AreEqual(mirror.Name, card.Name);
-            Assert.AreEqual(mirror.RarityStatus, card.RarityStatus);
+
+            Assert.AreEqual(targetedCardModel.Category, cardOnPage.Category);
+            Assert.AreEqual(targetedCardModel.Arena, cardOnPage.Arena);
+            Assert.AreEqual(targetedCardModel.Name, cardOnPage.Name);
+            Assert.AreEqual(targetedCardModel.RarityStatus, cardOnPage.RarityStatus);
         }
 
-        [TestInitialize]
+        [SetUp]
         public void Setup()
         {
             //Created a chrome driver and launches chrome
@@ -75,7 +91,7 @@ namespace StatsRoyale.SeleniumTests
             driver.Navigate().GoToUrl("https://statsroyale.com/");
         }
 
-        [TestCleanup]
+        [TearDown]
         public void Teardown()
         {
             //Close all chrome tabs
