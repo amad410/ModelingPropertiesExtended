@@ -24,10 +24,10 @@ namespace StatsRoyale.SeleniumFramework.Pages
         public IWebDriver _driver;
         public HeaderNav _HeaderNav;
 
-        public BasePage(IWebDriver driver)
+        public BasePage()
         {
-            _driver = driver;
-            _HeaderNav = new HeaderNav(_driver);
+            
+            _HeaderNav = new HeaderNav();
 
         }
     }

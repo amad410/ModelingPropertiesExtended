@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using StatsRoyale.SeleniumFramework.BrowserFactory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,9 @@ namespace StatsRoyale.SeleniumFramework.Pages
     {
         readonly HeaderNavMap Map;
 
-        public HeaderNav(IWebDriver driver)
+        public HeaderNav()
         {
-            Map = new HeaderNavMap(driver);
+            Map = new HeaderNavMap();
         }
 
         public void GoToCardsPage()
@@ -31,11 +32,11 @@ namespace StatsRoyale.SeleniumFramework.Pages
     }
     public class HeaderNavMap
     {
-        IWebDriver _driver;
+        
 
-        public HeaderNavMap(IWebDriver driver)
+        public HeaderNavMap()
         {
-            _driver = driver;
+            
         }
 
 
@@ -43,7 +44,7 @@ namespace StatsRoyale.SeleniumFramework.Pages
         {
             get
             {
-                return _driver.FindElement(By.CssSelector("a[href='/cards']"));
+                return Driver.FindElement(By.CssSelector("a[href='/cards']"));
             }
         }
     }

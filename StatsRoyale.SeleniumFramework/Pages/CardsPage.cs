@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using StatsRoyale.SeleniumFramework.BrowserFactory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +16,11 @@ namespace StatsRoyale.SeleniumFramework.Pages
     public class CardsPage : BasePage
     {
         public CardsPageMap _CardsPageMap;
-        IWebDriver _driver;
-        public CardsPage(IWebDriver driver): base(driver)
+       
+        public CardsPage(): base()
         {
-            _driver = driver;
-            _CardsPageMap = new CardsPageMap(_driver);
+            
+            _CardsPageMap = new CardsPageMap();
         }
         public IWebElement GetCardByCardName(string name)
         {
@@ -39,16 +40,16 @@ namespace StatsRoyale.SeleniumFramework.Pages
     public class CardsPageMap
     {
 
-        IWebDriver _driver;
+       
 
-        public CardsPageMap(IWebDriver driver) 
+        public CardsPageMap() 
         {
-            _driver = driver;
+            
 
         }
        
 
-        public IWebElement Card(string name)=> _driver.FindElement(By.CssSelector($"a[href='https://statsroyale.com/card/{name}']"));
+        public IWebElement Card(string name)=> Driver.FindElement(By.CssSelector($"a[href='https://statsroyale.com/card/{name}']"));
        
 
     }

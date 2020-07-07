@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using StatsRoyale.SeleniumFramework.BrowserFactory;
 using StatsRoyale.SeleniumFramework.Models;
 using System;
 using System.Collections.Generic;
@@ -22,10 +23,10 @@ namespace StatsRoyale.SeleniumFramework.Pages
     {
         public IWebDriver _driver;
         public CardDetailsPageMap _Map;
-        public CardDetailsPage(IWebDriver driver) : base(driver)
+        public CardDetailsPage() : base()
         {
-            _driver = driver;
-            _Map = new CardDetailsPageMap(_driver);
+            
+            _Map = new CardDetailsPageMap();
         }
 
         public IWebElement GetCardRarity()
@@ -56,15 +57,15 @@ namespace StatsRoyale.SeleniumFramework.Pages
     }
     public class CardDetailsPageMap
     {
-        public IWebDriver _driver;
-        public CardDetailsPageMap(IWebDriver driver)
+        
+        public CardDetailsPageMap()
         {
-            _driver = driver;
+            
         }
 
-        public IWebElement CardRarity => _driver.FindElement(By.CssSelector("div[class='card__rarity']"));
+        public IWebElement CardRarity => Driver.FindElement(By.CssSelector("div[class='card__rarity']"));
 
-        public IWebElement CardName => _driver.FindElement(By.CssSelector(".ui__headerMedium.card__cardName"));
-        public IWebElement CardRarityStatus => _driver.FindElement(By.CssSelector(".card__rarityCaption div.card__count"));
+        public IWebElement CardName => Driver.FindElement(By.CssSelector(".ui__headerMedium.card__cardName"));
+        public IWebElement CardRarityStatus => Driver.FindElement(By.CssSelector(".card__rarityCaption div.card__count"));
     }
 }
